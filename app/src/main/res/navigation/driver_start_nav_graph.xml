@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/driver_start_nav_graph"
+    app:startDestination="@id/registrationFragment2">
+
+    <fragment
+        android:id="@+id/registrationFragment2"
+        android:name="com.example.vehiclebookingapp.driver.fragments.DriverRegistrationFragment"
+        android:label="RegistrationFragment" >
+        <action
+            android:id="@+id/action_registrationFragment2_to_driverLoginFragment"
+            app:destination="@id/driverLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/driverLoginFragment"
+        android:name="com.example.vehiclebookingapp.driver.fragments.DriverLoginFragment"
+        android:label="fragment_driver_login"
+        tools:layout="@layout/fragment_driver_login" >
+        <action
+            android:id="@+id/action_driverLoginFragment_to_registrationFragment2"
+            app:destination="@id/registrationFragment2" />
+    </fragment>
+
+</navigation>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_nav_graph"
+    app:startDestination="@id/userHomeFragment">
+
+    <fragment
+        android:id="@+id/userDashboardFragment"
+        android:name="com.example.vehiclebookingapp.customer.fragments.UserDashboardFragment"
+        android:label="User Dashboard"
+        tools:layout="@layout/fragment_dashboard_user" />
+    <fragment
+        android:id="@+id/userHomeFragment"
+        android:name="com.example.vehiclebookingapp.driver.fragments.DriverHomeFragment"
+        android:label="User Home"
+        tools:layout="@layout/fragment_home_user" />
+    <fragment
+        android:id="@+id/userNotificationsFragment"
+        android:name="com.example.vehiclebookingapp.customer.fragments.UserNotificationsFragment"
+        android:label="User Notifications"
+        tools:layout="@layout/fragment_notifications_user" />
+    <fragment
+        android:id="@+id/userBookingFragment"
+        android:name="com.example.vehiclebookingapp.customer.fragments.UserBookingFragment"
+        android:label="All Vehicles"
+        tools:layout="@layout/fragment_user_booking" />
+    <fragment
+        android:id="@+id/userBookingsFragment"
+        android:name="com.example.vehiclebookingapp.customer.fragments.UserBookingsFragment"
+        android:label="User Bookings"
+        tools:layout="@layout/fragment_user_bookings" />
+</navigation>

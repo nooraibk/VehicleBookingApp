@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/driverFragmentHome">
+
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.vehiclebookingapp.driver.fragments.DriverProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_driver_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_uploadDocumentFragment"
+            app:destination="@id/uploadDocumentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/uploadDocumentFragment"
+        android:name="com.example.vehiclebookingapp.driver.fragments.DriverUploadDocumentFragment"
+        android:label="Upload Document"
+        tools:layout="@layout/fragment_upload_document" />
+    <activity
+        android:id="@+id/addVehicleActivity"
+        android:name="com.example.vehiclebookingapp.driver.activities.AddVehicleActivity"
+        android:label="Add Vehicle"
+        tools:layout="@layout/activity_add_vehicle" />
+    <fragment
+        android:id="@+id/vehiclesFragment"
+        android:name="com.example.vehiclebookingapp.driver.fragments.VehiclesFragment"
+        android:label="Vehicles"
+        tools:layout="@layout/fragment_vehicles" >
+        <action
+            android:id="@+id/action_vehiclesFragment_to_addVehicleActivity"
+            app:destination="@id/addVehicleActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/driverFragmentHome"
+        android:name="com.example.vehiclebookingapp.driver.fragments.DriverHomeFragment"
+        android:label="Driver Home"
+        tools:layout="@layout/fragment_home_user" />
+    <fragment
+        android:id="@+id/driverBookingsFragment"
+        android:name="com.example.vehiclebookingapp.driver.fragments.DriverBookingsFragment"
+        android:label="Driver Bookings" />
+
+
+</navigation>
