@@ -12,7 +12,7 @@
         />
 
     <item
-        android:id="@+id/driverBookingsFragment"
+        android:id="@+id/driverBookingsFragment2"
         android:icon="@drawable/baseline_taxi_alert_24"
         android:title="Bookings" />
 

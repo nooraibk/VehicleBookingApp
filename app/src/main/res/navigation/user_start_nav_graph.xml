@@ -9,7 +9,11 @@
         android:id="@+id/userLoginFragment"
         android:name="com.example.vehiclebookingapp.customer.fragments.UserLoginFragment"
         android:label="fragment_user_login"
-        tools:layout="@layout/fragment_user_login" />
+        tools:layout="@layout/fragment_user_login" >
+        <action
+            android:id="@+id/action_userLoginFragment_to_userRegistrationFragment"
+            app:destination="@id/userRegistrationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userRegistrationFragment"
         android:name="com.example.vehiclebookingapp.customer.fragments.UserRegistrationFragment"

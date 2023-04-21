@@ -39,12 +39,13 @@ class DriverLoginFragment : Fragment() {
 
         binding.btnDriverLogin.setOnClickListener {
             loginDriver()
-            viewModel.loginResponse.observe(viewLifecycleOwner) {
-                it.driver?.let { it1 -> SharedPrefManagerDriver(requireContext()).saveDriver(it1) }
+        }
+
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
+            it.driver?.let { it1 -> SharedPrefManagerDriver(requireContext()).saveDriver(it1) }
             //    if (it.message?.contains("Success") == true)
-                startActivity(Intent(activity, DriverMainActivity::class.java))
-                Log.d("Login User Data", it.driver.toString())
-            }
+            startActivity(Intent(activity, DriverMainActivity::class.java))
+            Log.d("Login User Data", it.driver.toString())
         }
 
         binding.tvGoToRegister.setOnClickListener {

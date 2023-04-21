@@ -1,8 +1,7 @@
 package com.example.vehiclebookingapp.driver.data
 
 
-import android.provider.ContactsContract.Profile
-import com.example.vehiclebookingapp.customer.model.UserBookingsModelItem
+import com.example.vehiclebookingapp.customer.model.ResponseUserBooking
 import com.example.vehiclebookingapp.driver.model.*
 import retrofit2.Response
 import retrofit2.http.Body
@@ -30,7 +29,7 @@ interface RetrofitServiceDriver {
     suspend fun registerCar(@Body car : RegCarModel) : Response<CarModel>
 
     @GET("driverbookings/{id}")
-    suspend fun driverBookings(@Path("id") driverId : Int) : Response<List<UserBookingsModelItem>>
+    suspend fun driverBookings(@Path("id") driverId : Int) : Response<List<ResponseUserBooking>>
 
 
     @POST("driverupdate")

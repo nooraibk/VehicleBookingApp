@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.vehiclebookingapp.R
 import com.example.vehiclebookingapp.customer.SharedPrefManagerUser
 import com.example.vehiclebookingapp.customer.activities.CustomerStartActivity
@@ -78,9 +79,10 @@ class UserLoginFragment : Fragment() {
         }
 
 
-
-
-
+        binding.tvCustomerRegister.setOnClickListener {
+            val action = R.id.action_userLoginFragment_to_userRegistrationFragment
+            findNavController().navigate(action)
+        }
 
         return binding.root
     }
@@ -89,5 +91,4 @@ class UserLoginFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
 }

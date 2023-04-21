@@ -5,11 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.vehiclebookingapp.customer.adapters.UserBookingsAdapter
+import com.example.vehiclebookingapp.customer.model.ResponseUserBooking
 import com.example.vehiclebookingapp.databinding.ItemVehicleRecyclerBinding
 import com.example.vehiclebookingapp.driver.model.DriverCars
 
-class VehiclesAdapter(private val carsList: List<DriverCars>) :
+class VehiclesAdapter(private val carsList: List<DriverCars>, private val listener: ItemClickListener) :
     RecyclerView.Adapter<VehiclesAdapter.ViewHolder>() {
+
+    interface ItemClickListener{
+        fun onItemClick(item: DriverCars)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflator = LayoutInflater.from(parent.context)
         val view = ItemVehicleRecyclerBinding.inflate(inflator, parent, false)
@@ -27,6 +33,8 @@ class VehiclesAdapter(private val carsList: List<DriverCars>) :
             for (image in car.images) {
                 val imageUri = "https://carapi.cricdigital.com/car-images/" + image.image
 
+                Log.d("images", imageUri)
+
                 Glide.with(holder.itemView.context)
                     .load(imageUri)
                     .into(holder.binding.ivVehicle)
@@ -34,6 +42,10 @@ class VehiclesAdapter(private val carsList: List<DriverCars>) :
         }
 
         holder.itemView
+
+        holder.binding.root.setOnClickListener {
+            listener.onItemClick(car)
+        }
 
     }
 

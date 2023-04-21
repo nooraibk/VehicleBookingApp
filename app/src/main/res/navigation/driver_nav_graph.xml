@@ -40,9 +40,9 @@
         android:label="Driver Home"
         tools:layout="@layout/fragment_home_user" />
     <fragment
-        android:id="@+id/driverBookingsFragment"
+        android:id="@+id/driverBookingsFragment2"
         android:name="com.example.vehiclebookingapp.driver.fragments.DriverBookingsFragment"
-        android:label="Driver Bookings" />
+        android:label="Driver Booking" />
 
 
 </navigation>

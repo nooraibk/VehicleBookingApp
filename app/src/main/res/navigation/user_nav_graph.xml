@@ -29,5 +29,14 @@
         android:id="@+id/userBookingsFragment"
         android:name="com.example.vehiclebookingapp.customer.fragments.UserBookingsFragment"
         android:label="User Bookings"
-        tools:layout="@layout/fragment_user_bookings" />
+        tools:layout="@layout/fragment_user_bookings" >
+        <action
+            android:id="@+id/action_userBookingsFragment_to_bookVehicleActivity"
+            app:destination="@id/bookVehicleActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/bookVehicleActivity"
+        android:name="com.example.vehiclebookingapp.driver.activities.BookVehicleActivity"
+        android:label="Vehicle Details"
+        tools:layout="@layout/activity_book_vehicle" />
 </navigation>

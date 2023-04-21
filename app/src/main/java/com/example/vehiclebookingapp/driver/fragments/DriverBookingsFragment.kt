@@ -1,16 +1,20 @@
 package com.example.vehiclebookingapp.driver.fragments
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vehiclebookingapp.customer.adapters.UserBookingsAdapter
+import com.example.vehiclebookingapp.customer.model.ResponseUserBooking
 import com.example.vehiclebookingapp.databinding.FragmentDriverBookingsBinding
 import com.example.vehiclebookingapp.driver.SharedPrefManagerDriver
 import com.example.vehiclebookingapp.driver.data.DriverRepo
@@ -42,21 +46,52 @@ class DriverBookingsFragment : Fragment() {
             ViewModelProvider(this, bookingViewModelFactory)[DriverBookingViewModel::class.java]
 
 
-        binding.driverBookingsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-
         lifecycleScope.launch {
             SharedPrefManagerDriver(requireContext()).getDriver().id?.let {
                 bookingsViewModel.driverBookings(it)
             }
-            bookingsViewModel.driverBookings.observe(viewLifecycleOwner) {
-                bookingsAdapter = UserBookingsAdapter(it)
-                binding.driverBookingsRecyclerview.adapter = bookingsAdapter
-            }
         }
 
-
+        bookingsViewModel.driverBookings.observe(viewLifecycleOwner) {
+            passListToRecyclerView(it)
+        }
 
         return binding.root
+    }
+
+    private fun passListToRecyclerView(userBookings: List<ResponseUserBooking>){
+        binding.driverBookingsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = UserBookingsAdapter(userBookings, object: UserBookingsAdapter.ItemClickListener{
+            override fun onItemClick(item: ResponseUserBooking) {
+//                Toast.makeText(requireContext(), "${ item.user?.name } ${item.car?.carNo}", Toast.LENGTH_SHORT).show()
+                bookingsViewModel.bookingDetails = item
+
+//                sendSMS(item.user?.phoneNo.toString(), "Hello From Driver Booking App")
+
+            }
+        })
+        binding.driverBookingsRecyclerview.adapter = adapter
+    }
+
+    private fun sendSMS(number: String, text: String){
+
+
+        val smsIntent = Intent(Intent.ACTION_VIEW).apply {
+            type = "vnd.android-dir/mms-sms"
+            // Add the phone number and message body as extras to the Intent
+            putExtra("address", number)
+            putExtra("sms_body", text)
+        }
+
+// Check if there is a default SMS app on the device
+        if (smsIntent.resolveActivity(requireContext().packageManager) != null) {
+            // Launch the SMS app with the Intent
+            startActivity(smsIntent)
+        } else {
+            // No default SMS app found, handle the error
+            Toast.makeText(requireContext(), "No SMS app found on the device", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun onDestroy() {

@@ -25,6 +25,6 @@ interface RetrofitServiceUser {
 
 
     @GET("userbookings/{id}")
-    suspend fun userBookings(@Path("id") userId: Int) : Response<List<UserBookingsModelItem>>
+    suspend fun userBookings(@Path("id") userId: Int) : Response<List<ResponseUserBooking>>
 
 }

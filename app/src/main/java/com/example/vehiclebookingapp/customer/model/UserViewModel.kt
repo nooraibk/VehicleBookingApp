@@ -29,11 +29,11 @@ class UserViewModel(private val userRepo: UserRepo) : ViewModel() {
                     Log.e("Response Exception", "Device might not be connected to the internet")
                     return@launch
                 } catch (e: HttpException) {
-                    Log.e("Response Exception", "HTTPException, unexpected response")
                     return@launch
                 }
                 if (response.isSuccessful && response.body() != null) {
                     _loginResponse.postValue(response.body())
+                    Log.d("UserLoginData", response.body().toString())
                 } else {
                     Log.e("Response Error", response.errorBody().toString())
                 }

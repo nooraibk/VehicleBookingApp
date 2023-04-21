@@ -12,6 +12,8 @@ import retrofit2.HttpException
 
 class DriverCarsViewModel(private val driverRepo: DriverRepo) : ViewModel() {
 
+    var car = DriverCars()
+
     private val _carsListLive = MutableLiveData<List<DriverCars>>()
     val carsListLive get() = _carsListLive
 

@@ -1,3 +1,3 @@
 package com.example.vehiclebookingapp.customer.model
 
-class UserBookingsModel : ArrayList<UserBookingsModelItem>()
+class UserBookingsModel : ArrayList<ResponseUserBooking>()

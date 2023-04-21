@@ -31,7 +31,7 @@ class DriverMainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.driverFragmentHome, R.id.historyFragment, R.id.driverBookingsFragment
+                R.id.driverFragmentHome, R.id.historyFragment, R.id.driverBookingsFragment2
                 , R.id.vehiclesFragment, R.id.profileFragment
             )
         )

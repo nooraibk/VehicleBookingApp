@@ -20,5 +20,6 @@ data class BookingModel(
 data class BookingBodyModel(
     val user_id: Int,
     val car_id: Int,
-    val driver_id: Int
+    val driver_id: Int,
+    val distance : Int
 )

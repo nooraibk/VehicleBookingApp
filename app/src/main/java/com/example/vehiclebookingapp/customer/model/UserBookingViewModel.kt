@@ -1,6 +1,7 @@
 package com.example.vehiclebookingapp.customer.model
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.vehiclebookingapp.customer.data.UserRepo
@@ -11,7 +12,10 @@ class UserBookingViewModel(private val repo: UserRepo) : ViewModel() {
 
     val bookingResponse = MutableLiveData<BookingModel>()
 
-    val userBookings = MutableLiveData<List<UserBookingsModelItem>>()
+    private var _userBookings = MutableLiveData<List<ResponseUserBooking>>()
+    val userBookings : LiveData<List<ResponseUserBooking>> get() = _userBookings
+
+    var bookedCar = ResponseUserBooking()
 
     suspend fun bookCar(bookingBodyModel: BookingBodyModel) {
         val response = try {
@@ -36,17 +40,17 @@ class UserBookingViewModel(private val repo: UserRepo) : ViewModel() {
         val response = try {
             repo.userBookings(userId)
         } catch (e: IOException) {
-            Log.e("Response Exception", "Device might not be connected to the internet")
+            Log.e("BookingList Exception", "Device might not be connected to the internet")
             return
         } catch (e: HttpException) {
-            Log.e("Response Exception", "HTTPException, unexpected response")
+            Log.e("BookingList Exception", "HTTPException, unexpected response")
             return
         }
         if (response.isSuccessful && response.body() != null) {
-            userBookings.value = response.body()!!
-            Log.d("Retrofit POST Response", "${response.code()} $userBookings")
+            _userBookings.postValue(response.body()!!)
+            Log.d("BookingList POST Response", "${response.code()} ${response.body()!!}")
         } else {
-            Log.e("Response Error", response.errorBody().toString())
+            Log.e("BookingList Error", response.errorBody().toString())
         }
 
     }

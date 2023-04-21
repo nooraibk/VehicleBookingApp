@@ -1,6 +1,7 @@
 package com.example.vehiclebookingapp.customer.model
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,8 +14,8 @@ import retrofit2.HttpException
 class CarsViewModel(private val userRepo: UserRepo) : ViewModel() {
 
 
-    var carsList = MutableLiveData<List<DriverCars>>()
-
+    private var _carsList = MutableLiveData<List<DriverCars>>()
+    val carsList : LiveData<List<DriverCars>> get() = _carsList
 
     fun getAllVehicles() {
 
@@ -22,17 +23,17 @@ class CarsViewModel(private val userRepo: UserRepo) : ViewModel() {
             val response = try {
                 userRepo.getAllCars()
             } catch (e: IOException) {
-                Log.e("Response Exception", "Device might not be connected to the internet")
+                Log.e("CarsList Exception", "Device might not be connected to the internet")
                 return@launch
             } catch (e: HttpException) {
-                Log.e("Response Exception", "HTTPException, unexpected response")
+                Log.e("CarsList Exception", "HTTPException, unexpected response")
                 return@launch
             }
             if (response.isSuccessful && response.body() != null) {
-                carsList.value = response.body()!!
-                Log.d("Retrofit POST Response", "${response.code()} $carsList")
+                _carsList.postValue(response.body()!!)
+                Log.d("CarsList Response", "${response.code()} ${response.body()!!}")
             } else {
-                Log.e("Response Error", response.errorBody().toString())
+                Log.e("CarsList Error", response.errorBody().toString())
             }
         }
     }

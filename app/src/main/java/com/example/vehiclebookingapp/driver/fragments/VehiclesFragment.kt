@@ -14,6 +14,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vehiclebookingapp.R
+import com.example.vehiclebookingapp.customer.adapters.UserBookingsAdapter
+import com.example.vehiclebookingapp.customer.model.ResponseUserBooking
 import com.example.vehiclebookingapp.databinding.FragmentVehiclesBinding
 import com.example.vehiclebookingapp.driver.SharedPrefManagerDriver
 import com.example.vehiclebookingapp.driver.adapters.VehiclesAdapter
@@ -34,7 +36,6 @@ class VehiclesFragment : Fragment() {
     private lateinit var sharedPrefManagerDriver: SharedPrefManagerDriver
 
     private lateinit var listOfCars: List<DriverCars>
-    private lateinit var carsAdapter: VehiclesAdapter
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -62,11 +63,11 @@ class VehiclesFragment : Fragment() {
             driverCarsViewModel.getVehicles(driverID)
         } else Toast.makeText(requireContext(), "No driver", Toast.LENGTH_SHORT).show()
 
-        binding.recyclerViewVehicles.layoutManager = LinearLayoutManager(requireContext())
+
 //        listOfCars = driverCarsViewModel.carsList
         driverCarsViewModel.carsListLive.observe(viewLifecycleOwner) {
-            carsAdapter = VehiclesAdapter(it)
-            binding.recyclerViewVehicles.adapter = carsAdapter
+            passListToRecyclerView(it)
+
         }
 
 
@@ -78,6 +79,17 @@ class VehiclesFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun passListToRecyclerView(carsList: List<DriverCars>){
+        binding.recyclerViewVehicles.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = VehiclesAdapter(carsList, object: VehiclesAdapter.ItemClickListener{
+            override fun onItemClick(item: DriverCars) {
+                //Toast.makeText(requireContext(), "${ item.carNo }", Toast.LENGTH_SHORT).show()
+
+            }
+        })
+        binding.recyclerViewVehicles.adapter = adapter
     }
 
     override fun onDestroy() {

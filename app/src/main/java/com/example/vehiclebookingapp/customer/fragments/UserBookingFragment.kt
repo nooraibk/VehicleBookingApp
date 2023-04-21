@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.vehiclebookingapp.R
 import com.example.vehiclebookingapp.customer.SharedPrefManagerUser
 import com.example.vehiclebookingapp.customer.data.UserRepo
 import com.example.vehiclebookingapp.databinding.FragmentUserBookingBinding
@@ -52,14 +53,26 @@ class UserBookingFragment : Fragment() {
         binding.userBookingRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
          userCarsViewModel.carsList.observe(viewLifecycleOwner){
+             Log.d("CarsListResponse", it.toString())
              carsAdapter = VehiclesBookingAdapter(it, object :VehiclesBookingAdapter.ItemClickListener{
                  override fun onItemClick(item: DriverCars) {
 
-                     val bookingCar = item.driverId?.let { item.id?.let { it1 -> sharedPrefManagerUser.getUser().id?.let { it2 -> BookingBodyModel(driver_id = it.toInt(), car_id = it1, user_id = it2) } } }
+//                     driverCarsViewModel.car = item
+//                     val action = R.id.action_vehiclesFragment_to_bookVehicleActivity
+//                     navController.navigate(action)
+
+                     val bookCar = item.id?.let { it1 ->
+                         sharedPrefManagerUser.getUser().id?.let { it2 ->
+                             item.driverId?.let { it3 ->
+                                 BookingBodyModel(driver_id = it3.toInt(), car_id = it1, user_id = it2, distance = 0)
+                             }
+                         }
+                     }
+                     Log.d("Booking Response", bookCar.toString())
 
                      lifecycleScope.launch {
-                         if (bookingCar != null) {
-                             bookingsViewModel.bookCar(bookingCar)
+                         if (bookCar != null) {
+                             bookingsViewModel.bookCar(bookCar)
                          }
 
                          bookingsViewModel.bookingResponse.observe(viewLifecycleOwner){
@@ -77,12 +90,8 @@ class UserBookingFragment : Fragment() {
 
         return binding.root
     }
-
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-
-
 }
