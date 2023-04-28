@@ -51,17 +51,17 @@ class DriverCarsViewModel(private val driverRepo: DriverRepo) : ViewModel() {
             val response = try {
                 driverRepo.registerVehicle(car)
             } catch (e: IOException) {
-                Log.e("Response Exception", "Device might not be connected to the internet")
+                Log.e("AddCarResponse Exception", "Device might not be connected to the internet")
                 return@launch
             } catch (e: HttpException) {
-                Log.e("Response Exception", "HTTPException, unexpected response")
+                Log.e("AddCarResponse Exception", "HTTPException, unexpected response")
                 return@launch
             }
             if (response.isSuccessful && response.body() != null) {
                 _carResponse.postValue(response.body()!!)
-                Log.d("Retrofit POST Response", "${response.code()} $carsList")
+                Log.d("AddCarResponse POST Response", "${response.code()} $carsList")
             } else {
-                Log.e("Response Error", response.errorBody().toString())
+                Log.e("AddCarResponse Error", response.errorBody().toString())
             }
         }
     }

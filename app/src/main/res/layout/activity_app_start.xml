@@ -21,6 +21,29 @@
         android:layout_weight="1.3"
         android:src="@drawable/mainmobile" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Cab First"
+        android:fontFamily="@font/dancing_script"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textColor="@color/colorAccentDark"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Number One Place To Find and Register Cabs"
+        android:fontFamily="@font/poppins"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +61,7 @@
             android:background="@drawable/bg_button"
             android:text="Register a Car"
             android:textAllCaps="false"
-            android:textColor="#40B59F"
+            android:textColor="@color/colorAccent"
             android:textSize="16sp" />
 
         <Button

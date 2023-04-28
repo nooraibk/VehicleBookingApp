@@ -36,21 +36,39 @@
                 android:layout_below="@+id/tvCarName"
                 android:id="@+id/tvCarModel"/>
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Car City"
+                android:layout_below="@+id/tvCarModel"
+                android:id="@+id/tvCarCity"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Car Status"
+                android:layout_below="@+id/tvCarCity"
+                android:id="@+id/tvCarStatus"/>
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="40dp"
                 android:text="Book"
-                android:textSize="12sp"
-                android:id="@+id/btnBook"/>
+                android:textSize="10sp"
+                android:id="@+id/btnBook"
+                android:background="@drawable/bg_button_color"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
 
 
         </LinearLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/civic_image"
             android:layout_centerVertical="true"
             android:id="@+id/ivVehicle"/>
 

@@ -2,12 +2,15 @@ package com.example.vehiclebookingapp.driver.fragments
 
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -35,7 +38,7 @@ class VehiclesFragment : Fragment() {
 
     private lateinit var sharedPrefManagerDriver: SharedPrefManagerDriver
 
-    private lateinit var listOfCars: List<DriverCars>
+    private var listOfCars = mutableListOf<DriverCars>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -67,7 +70,19 @@ class VehiclesFragment : Fragment() {
 //        listOfCars = driverCarsViewModel.carsList
         driverCarsViewModel.carsListLive.observe(viewLifecycleOwner) {
             passListToRecyclerView(it)
+            listOfCars = it as MutableList<DriverCars>
+        }
 
+        binding.searchVehicle.addTextChangedListener { str ->
+            if (listOfCars.isNotEmpty()) {
+                val searchedVehicles = listOfCars.filter {
+                    it.carName?.contains(str.toString(), ignoreCase = true) == true ||
+                            it.carNo?.contains(str.toString(), ignoreCase = true) == true ||
+                            it.carModel?.contains(str.toString(), ignoreCase = true) == true
+                }
+//                Log.d("TextChangeListener", searchedVehicles.toString())
+                passListToRecyclerView(searchedVehicles)
+            }
         }
 
 
@@ -81,14 +96,15 @@ class VehiclesFragment : Fragment() {
         return binding.root
     }
 
-    private fun passListToRecyclerView(carsList: List<DriverCars>){
+    private fun passListToRecyclerView(carsList: List<DriverCars>) {
         binding.recyclerViewVehicles.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = VehiclesAdapter(carsList, object: VehiclesAdapter.ItemClickListener{
+        val adapter = VehiclesAdapter(object : VehiclesAdapter.ItemClickListener {
             override fun onItemClick(item: DriverCars) {
                 //Toast.makeText(requireContext(), "${ item.carNo }", Toast.LENGTH_SHORT).show()
 
             }
         })
+        adapter.submitList(carsList)
         binding.recyclerViewVehicles.adapter = adapter
     }
 

@@ -30,7 +30,8 @@ class MainActivityUser : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.userHomeFragment, R.id.userDashboardFragment, R.id.userNotificationsFragment
+//                R.id.userHomeFragment, R.id.userDashboardFragment,
+                R.id.userNotificationsFragment
             , R.id.userBookingFragment, R.id.userBookingsFragment
             )
         )

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -33,6 +34,7 @@ class UserBookingFragment : Fragment() {
 
     private lateinit var carsAdapter: VehiclesBookingAdapter
 
+    private var listOfCars = mutableListOf<DriverCars>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,45 +52,59 @@ class UserBookingFragment : Fragment() {
 
         sharedPrefManagerUser = SharedPrefManagerUser(requireContext())
         userCarsViewModel.getAllVehicles()
+
+        binding.searchVehicle.addTextChangedListener { str ->
+            if (listOfCars.isNotEmpty()) {
+                val searchedVehicles = listOfCars.filter {
+                    it.carName?.contains(str.toString(), ignoreCase = true) == true ||
+                            it.carNo?.contains(str.toString(), ignoreCase = true) == true ||
+                            it.carModel?.contains(str.toString(), ignoreCase = true) == true
+                }
+//                Log.d("TextChangeListener", searchedVehicles.toString())
+                passDataToRecyclerView(searchedVehicles)
+            }
+        }
+
         binding.userBookingRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
          userCarsViewModel.carsList.observe(viewLifecycleOwner){
-             Log.d("CarsListResponse", it.toString())
-             carsAdapter = VehiclesBookingAdapter(it, object :VehiclesBookingAdapter.ItemClickListener{
-                 override fun onItemClick(item: DriverCars) {
+             passDataToRecyclerView(it)
+             listOfCars = it as MutableList<DriverCars>
+         }
+
+        return binding.root
+    }
+
+    private fun passDataToRecyclerView(cars : List<DriverCars>){
+        carsAdapter = VehiclesBookingAdapter(cars, object :VehiclesBookingAdapter.ItemClickListener{
+            override fun onItemClick(item: DriverCars) {
 
 //                     driverCarsViewModel.car = item
 //                     val action = R.id.action_vehiclesFragment_to_bookVehicleActivity
 //                     navController.navigate(action)
 
-                     val bookCar = item.id?.let { it1 ->
-                         sharedPrefManagerUser.getUser().id?.let { it2 ->
-                             item.driverId?.let { it3 ->
-                                 BookingBodyModel(driver_id = it3.toInt(), car_id = it1, user_id = it2, distance = 0)
-                             }
-                         }
-                     }
-                     Log.d("Booking Response", bookCar.toString())
+                val bookCar = item.id?.let { it1 ->
+                    sharedPrefManagerUser.getUser().id?.let { it2 ->
+                        item.driverId?.let { it3 ->
+                            BookingBodyModel(driver_id = it3.toInt(), car_id = it1, user_id = it2, distance = 0)
+                        }
+                    }
+                }
+                Log.d("Booking Response", bookCar.toString())
 
-                     lifecycleScope.launch {
-                         if (bookCar != null) {
-                             bookingsViewModel.bookCar(bookCar)
-                         }
+                lifecycleScope.launch {
+                    if (bookCar != null) {
+                        bookingsViewModel.bookCar(bookCar)
+                    }
 
-                         bookingsViewModel.bookingResponse.observe(viewLifecycleOwner){
-                             Log.d("Booking Response", it.message)
-                         }
-                     }
+                    bookingsViewModel.bookingResponse.observe(viewLifecycleOwner){
+                        Log.d("Booking Response", it.message)
+                    }
+                }
 
-                 }
-             })
-             binding.userBookingRecyclerView.adapter = carsAdapter
-
-         }
-
-
-
-        return binding.root
+            }
+        })
+        binding.userBookingRecyclerView.adapter = carsAdapter
     }
     override fun onDestroy() {
         super.onDestroy()

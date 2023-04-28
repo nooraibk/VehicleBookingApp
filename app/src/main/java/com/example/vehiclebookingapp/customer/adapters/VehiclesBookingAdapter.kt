@@ -26,6 +26,8 @@ class VehiclesBookingAdapter(private val carsList: List<DriverCars>, private val
         Log.d("Car List", carsList.toString())
         holder.binding.tvCarName.text = car.carNo
         holder.binding.tvCarModel.text = car.carModel
+        holder.binding.tvCarCity.text = car.carModel
+        holder.binding.tvCarModel.text = car.carModel
 
         if (car.images.isNotEmpty()){
 

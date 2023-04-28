@@ -1,105 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_marginTop="60dp"
     tools:context=".driver.activities.AddVehicleActivity">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="-25dp"
-        android:backgroundTint="@color/lightGrey"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:padding="20dp"
-            android:text="Add Your Vehicle Now"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="120dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/taxi" />
-
-
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp">
+        android:layout_marginTop="60dp"
+        android:background="@drawable/bgcardbottommain"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:text="Add Your Vehicle Now"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
 
             <EditText
                 android:id="@+id/etCarName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/bg_btn_outline"
-                android:hint="Car Name"
-                android:inputType="textPersonName"
-                android:paddingStart="15dp" />
+                android:background="@drawable/bg_edittext"
+                android:hint="Name e.g. Honda"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:textSize="16sp" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/etCarNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_edittext"
+                android:hint="Number e.g. LGK 8776"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/etCarCompany"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_btn_outline"
-                    android:hint="Car Number"
-                    android:inputType="textPersonName"
-                    android:paddingStart="15dp" />
-
-                <EditText
-                    android:id="@+id/etCarModel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_btn_outline"
-                    android:hint="Car Model e.g 2018"
-                    android:inputType="textPersonName"
-                    android:paddingStart="15dp" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnUploadVehicleImages"
+            <EditText
+                android:id="@+id/etCarModel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:background="@color/colorAccentDark"
-                android:onClick="btnGetImagesOfVehicle"
-                android:text="Upload Images"
-                android:textColor="@color/white" />
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="Model e.g. 2008"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etCarSeats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="Seats Capacity e.g. 3"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etCarTransmission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_edittext"
+                android:hint="Transmission e.g. 3"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:id="@+id/layoutImages"
@@ -133,20 +118,44 @@
 
             </LinearLayout>
 
+<!--            <Button-->
+<!--                android:id="@+id/btnUploadVehicleImages"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@drawable/bg_edittext"-->
+<!--                android:text="Add Vehicle Images"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/colorAccent"-->
+<!--                android:textSize="16sp" />-->
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/bgcardwhite"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="30dp">
+
 
             <Button
                 android:id="@+id/btnAddVehicle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="16dp"
-                android:background="@color/colorAccentDark"
+                android:background="@drawable/bg_button_color"
                 android:text="Add Vehicle"
-                android:textColor="@color/white" />
-
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"/>
 
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

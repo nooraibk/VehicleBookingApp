@@ -5,7 +5,7 @@
     <string name="stripe_client_key" templateMergeStrategy="preserve" translatable="false">stripe_sk_key</string>
     <string name="firebase_hosting_url" templateMergeStrategy="preserve" translatable="false">https://firebase_hosting_url/</string>
 
-    <string name="app_name">Uber Clone</string>
+    <string name="app_name">Hazir</string>
     <string name="phone_driver">Phone</string>
     <string name="call_uber">Call Car</string>
     <string name="type_4">Bike</string>
@@ -296,4 +296,8 @@
     <string name="Lorem">Quia aliquid praesentium quia vel fuga voluptatem. Ut quas explicabo molestiae. Explicabo ratione eos vero optio qui perferendis eos. Dignissimos minus ipsum qui in voluptatem. Enim earum enim illo omnis ullam porro reprehenderit. Accusamus dolor assumenda sit dolorum repudiandae. Accusamus id quam dolorum a praesentium ea porro. Ut dolorum occaecati deserunt a. Non facilis rerum neque quia eaque ut. Distinctio impedit omnis reprehenderit quia sint.</string>
 
 
+    <string-array name="transmission_type">
+        <item>Automatic</item>
+        <item>Manual</item>
+    </string-array>
 </resources>

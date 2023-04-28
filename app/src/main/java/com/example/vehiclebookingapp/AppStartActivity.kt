@@ -2,10 +2,9 @@ package com.example.vehiclebookingapp
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.vehiclebookingapp.customer.SharedPrefManagerUser
 import com.example.vehiclebookingapp.customer.activities.CustomerStartActivity
 import com.example.vehiclebookingapp.customer.activities.MainActivityUser

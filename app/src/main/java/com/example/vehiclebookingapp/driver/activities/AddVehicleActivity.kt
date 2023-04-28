@@ -9,12 +9,14 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.vehiclebookingapp.R
 import com.example.vehiclebookingapp.databinding.ActivityAddVehicleBinding
 import com.example.vehiclebookingapp.driver.SharedPrefManagerDriver
 import com.example.vehiclebookingapp.driver.data.DriverRepo
@@ -23,8 +25,7 @@ import java.io.ByteArrayOutputStream
 
 class AddVehicleActivity : AppCompatActivity() {
 
-    private lateinit var _binding: ActivityAddVehicleBinding
-    val binding get() = _binding
+    lateinit var binding: ActivityAddVehicleBinding
 
     private lateinit var viewModel: DriverCarsViewModel
 
@@ -36,7 +37,7 @@ class AddVehicleActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityAddVehicleBinding.inflate(layoutInflater)
+        binding = ActivityAddVehicleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val viewModelFactory = CarViewModelFactory(DriverRepo())
@@ -46,13 +47,14 @@ class AddVehicleActivity : AppCompatActivity() {
                 viewModelFactory
             )[DriverCarsViewModel::class.java]
 
+
         binding.btnAddVehicle.setOnClickListener {
 
             val car = RegCarModel(
-                carModel = binding.etCarModel.text.toString(),
-                carNo = binding.etCarCompany.text.toString(),
-                driverId = SharedPrefManagerDriver(this).getDriver().id,
                 carName = binding.etCarName.text.toString(),
+                carNo = binding.etCarNo.text.toString(),
+                carModel = binding.etCarModel.text.toString(),
+                driverId = SharedPrefManagerDriver(this).getDriver().id,
                 images = encodedString
             )
             viewModel.registerCar(car)
@@ -63,9 +65,12 @@ class AddVehicleActivity : AppCompatActivity() {
             }
         }
 
+        binding.layoutImages.setOnClickListener {
+            btnGetImagesOfVehicle()
+        }
     }
 
-    fun btnGetImagesOfVehicle(view: View) {
+    fun btnGetImagesOfVehicle() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         intent.type = "image/*"
@@ -73,8 +78,6 @@ class AddVehicleActivity : AppCompatActivity() {
             Intent.createChooser(intent, "Select Picture"),
             PICK_IMAGES_REQUEST_CODE
         )
-
-
     }
 
     @Deprecated("Deprecated in Java")
@@ -106,6 +109,7 @@ class AddVehicleActivity : AppCompatActivity() {
                 for ((i, image) in imagesList.withIndex()) {
                     if (i > 2) return
                     val imageView = binding.layoutImages.getChildAt(i)
+                    imageView.visibility = View.VISIBLE
                     val stream = ByteArrayOutputStream()
                     image.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                     val byteArray = stream.toByteArray()
@@ -118,5 +122,4 @@ class AddVehicleActivity : AppCompatActivity() {
             }
         }
     }
-
 }

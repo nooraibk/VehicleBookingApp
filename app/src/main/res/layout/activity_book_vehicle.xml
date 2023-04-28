@@ -12,9 +12,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/colorAccent"
         app:title="Vehicle Details"
-        app:titleTextColor="@color/black"
+        app:titleTextColor="@color/white"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Honda"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:textSize="22sp" />
 
@@ -97,21 +97,21 @@
                 app:drawableStartCompat="@drawable/ic_dashboard_black_24dp"
                 android:drawablePadding="8dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Rental Policies"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="22sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="30dp"-->
+<!--                android:text="Rental Policies"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="22sp" />-->
 
-            <TextView
-                android:id="@+id/tvRentalPolicies"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/Lorem"/>
+<!--            <TextView-->
+<!--                android:id="@+id/tvRentalPolicies"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:text="@string/Lorem"/>-->
 
 
 <!--            <TextView-->
